@@ -140,12 +140,18 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.13.0
+      - name: Set arm arch
+        run: set npm_config_arch=arm64
+        shell: bash
       - name: Install pnpm
         uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.19.0
+      - name: Install VS arm64 libraries
+        run: vs_installer.exe --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.MFC.ARM64 --includeRecommended
+        shell: pwsh
       - name: Install node dependencies
-        run: npm i
+        run: npm i --target_arch=arm64 --target_platform=windows
         shell: bash
       - name: Package recipes
         run: pnpm i && pnpm run package

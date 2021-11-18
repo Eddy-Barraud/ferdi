@@ -145,7 +145,7 @@ jobs:
         with:
           version: 6.19.0
       - name: Install node dependencies
-        run: npm i
+        run: npm i --target_arch=arm64 --target_platform=windows
         shell: bash
       - name: Package recipes
         run: pnpm i && pnpm run package

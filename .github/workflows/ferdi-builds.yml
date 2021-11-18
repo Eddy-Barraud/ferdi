@@ -156,21 +156,5 @@ jobs:
         shell: bash
       - name: Build Ferdi without publish for any branch not 'nightly' and not 'release'
         if: ${{ env.GIT_BRANCH_NAME != 'nightly' && env.GIT_BRANCH_NAME != 'release' }}
-        run: npm run build -- --publish never
+        run: npm run build
         shell: bash
-      - name: Build Ferdi with publish for 'nightly' branch
-        if: ${{ env.GIT_BRANCH_NAME == 'nightly' }}
-        run: npm run build -- --publish always -c.publish.provider=github -c.publish.owner=${{ github.repository_owner }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.FERDI_PUBLISH_TOKEN }}
-          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
-          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
-      - name: Build Ferdi with publish for 'release' branch
-        if: ${{ env.GIT_BRANCH_NAME == 'release' }}
-        run: npm run build -- --publish always -c.publish.provider=github -c.publish.owner=${{ github.repository_owner }} -c.publish.repo=ferdi
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.FERDI_PUBLISH_TOKEN }}
-          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
-          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}

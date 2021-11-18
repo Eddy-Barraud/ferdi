@@ -145,7 +145,7 @@ jobs:
         with:
           version: 6.19.0
       - name: Install node dependencies
-        run: npm i --target_arch=arm64 --target_platform=windows
+        run: npm i
         shell: bash
       - name: Package recipes
         run: pnpm i && pnpm run package
@@ -154,7 +154,12 @@ jobs:
       - name: Run linter and tests
         run: npm run lint && npm run test
         shell: bash
-      - name: Build Ferdi without publish for any branch not 'nightly' and not 'release'
-        if: ${{ env.GIT_BRANCH_NAME != 'nightly' && env.GIT_BRANCH_NAME != 'release' }}
+      - name: Build Ferdi develop branch
+        if: ${{ env.GIT_BRANCH_NAME == 'develop' }}
         run: npm run build
         shell: bash
+      - name: upload directory artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Ferdi-win32-arm64
+          path: releases\Ferdi-win32-arm64/

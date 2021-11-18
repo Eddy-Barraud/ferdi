@@ -149,8 +149,7 @@ jobs:
           version: 6.19.0
       - name: Install VS arm64 libraries
         run: | 
-          "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vs_installer.exe" --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.MFC.ARM64 --includeRecommended
-        shell: pwsh
+          '%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vs_installer.exe' --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.MFC.ARM64 --includeRecommended
       - name: Install node dependencies
         run: npm i --target_arch=arm64 --target_platform=windows
         shell: bash
